@@ -2,21 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/huangc28/yt_music/routes"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/huangc28/yt_music/routes"
 )
 
 func health(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "ivy beautiful\n")
+	fmt.Fprintf(w, "ok\n")
 }
 
 func newRoutes() *http.ServeMux {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/health", health)
-
 	router.HandleFunc("/search-playlist", routes.SearchPlaylist)
 
 	return router
