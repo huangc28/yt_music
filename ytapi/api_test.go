@@ -1,4 +1,4 @@
-package youtubeapi
+package ytapi
 
 import (
 	"flag"

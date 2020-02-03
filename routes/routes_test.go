@@ -4,13 +4,17 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
-	"strings"
 	"testing"
 )
 
 func TestSearchPlayListRoute(t *testing.T) {
 	// initialize a new request to search playlist API
-	req, err := http.NewRequest("GET", "/search-playlist", strings.NewReader("hiphop"))
+	req, err := http.NewRequest("GET", "/search-playlist", nil)
+	q := req.URL.Query()
+	q.Add("search", "hiphop")
+	req.URL.RawQuery = q.Encode()
+
+	log.Printf("query string %v", req.URL.String())
 
 	if err != nil {
 		log.Fatal(err)
