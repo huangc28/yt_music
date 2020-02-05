@@ -7,6 +7,8 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
+const MAX_RESULT = 25
+
 type YoutubeApi struct {
 	Service *youtube.Service
 }
@@ -32,11 +34,11 @@ func NewYoutubeAPI(devKey string) (*YoutubeApi, error) {
 }
 
 // try requesting youtube search api for paylist result
-func (ya *YoutubeApi) SearchPlaylist(criteria string) (*youtube.SearchListResponse, error) {
+func (ya *YoutubeApi) SearchPlayList(criteria string) (*youtube.SearchListResponse, error) {
 	call := ya.Service.Search.List("id,snippet").
-		Q(queryCriteria).
+		Q(criteria).
 		Type("playlist").
-		MaxResults(*maxResults)
+		MaxResults(MAX_RESULT)
 
 	return call.Do()
 }
